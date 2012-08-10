@@ -4,7 +4,8 @@ Wishing myself a better day explaining these stuffs to you [-O<
 see ya in hours :Dsdasw
 asdasd
 It is C!! :)
-Fuck Sata
+//Fuck Sata
+it is Sata :D
 Hallo?
 FUCK U ALLLL!!!! 
 :D
