@@ -7,3 +7,5 @@ It is C!! :)
 Fuck Sata
 Hallo?
 FUCK U ALLLL!!!! 
+:D
+:D
