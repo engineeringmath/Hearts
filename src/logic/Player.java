@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-import logic.exception.CardNotInHandException;
+import logic.exception.CardNotFoundException;
 
 public class Player {
 
@@ -20,10 +20,10 @@ public class Player {
 		// TODO
 	}
 	
-	public void takeCard(Card card) throws CardNotInHandException{
+	public void takeCard(Card card) throws CardNotFoundException{
 		boolean exist = cards.remove(card);
 		if(!exist){
-			throw new CardNotInHandException(card);
+			throw new CardNotFoundException(card);
 		}
 	}
 	
@@ -31,7 +31,7 @@ public class Player {
 	 * @return the cards in the players hand
 	 */
 	public Card[] getCards() {
-		return cards.toArray(new Card[cards.length);
+		return cards.toArray(new Card[cards.size()]);
 	}
 	
 	/**
