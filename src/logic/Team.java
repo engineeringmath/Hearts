@@ -6,4 +6,12 @@ public class Team {
 	}
 	
 	private Player[] players;
+
+	/**
+	 * @return the players
+	 */
+	public Player[] getPlayers() {
+		return players;
+	}
+
 }
