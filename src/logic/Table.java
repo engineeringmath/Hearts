@@ -35,7 +35,7 @@ public class Table {
 	 * @return an array of the cards on the table
 	 */
 	public Card[] getTableCards(){
-		// TODO Alireza
+		// TODO 
 		return null;
 	}
 	
@@ -46,7 +46,7 @@ public class Table {
 	public Card[] clearTable(){
 		Card[] cards = getTableCards();
 		
-		// TODO remove
+		// TODO
 		
 		return cards;
 	}

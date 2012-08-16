@@ -16,10 +16,20 @@ public class Player {
 		this.name = name;
 	}
 
+	/**
+	 * Gives a number of cards to the player
+	 * @param card an array of the cards to give
+	 */
 	public void giveCards(Card[] card){
-		// TODO
+		for(Card c : cards)
+			this.cards.add(c);
 	}
 	
+	/**
+	 * Takes a card from the players hand
+	 * @param card the card to take
+	 * @throws CardNotFoundException is thrown if such a card does not exist in the players hand
+	 */
 	public void takeCard(Card card) throws CardNotFoundException{
 		boolean exist = cards.remove(card);
 		if(!exist){

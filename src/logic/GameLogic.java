@@ -1,12 +1,20 @@
 package logic;
 
+
 public class GameLogic {
 	private static GameLogic instance;
 	
+	/**
+	 * @return the singleton instance of the GameLogic class
+	 */
 	public static GameLogic getInstance(){
 		return instance;
 	}
 	
+	/**
+	 * Creates a new singleton instance
+	 * @param playerNames the names of the players
+	 */
 	public static void newInstance(String[] playerNames){
 		instance = new GameLogic(playerNames);
 	}
@@ -34,11 +42,34 @@ public class GameLogic {
 		turn = 0;
 	}
 	
+	/**
+	 * Checks whether a given move is valid for the current state of the game
+	 * @param move the move to check its validity
+	 * @return true if the move was valid, false otherwise
+	 */
 	public boolean checkMove(Move move){
+		// TODO
 		return false;
 	}
 	
+	/**
+	 * Plays a move
+	 * @param move the move to play
+	 * @return true if the move was successful played, false otherwise
+	 */
 	public boolean playMove(Move move){
+		// TODO
 		return false;
 	}
+	
+	/**
+	 * Returns some requested information on the current state of the game
+	 * @param infoRequest defines the information to be returned
+	 * @return an instance of GameInfo containing the requested information
+	 */
+	public GameInfo requestInfo(InfoRequest infoRequest){
+		// TODO
+		return null;
+	}
+	
 }
