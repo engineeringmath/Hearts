@@ -25,18 +25,23 @@ public class Client implements Callable<String>{
 	private ObjectOutputStream output;
 	private InetAddress ip;
 	
+	public Client(Game game){
+		this.ip = InetAddress.getLocalHost();
+		this.game = game;
+	}
+	
 	/**
 	 * get's the message from the server and decieds what to do next
 	 * 
 	 */
-	public void getMessage(MessageType message){
+	private void getMessage(MessageType message){
 		
 	}
 	
 	/**
 	 * sends the fucking move to server :D
 	 */
-	public void sendMove(){
+	public void sendMove(Move move){
 		
 	}
 	
@@ -44,11 +49,11 @@ public class Client implements Callable<String>{
 	/**
 	 * get's the move of another player from the server and plays the move ( via the game instance )
 	 */
-	public void getServerMove(Move move){
+	private void getServerMove(Move move){
 		
 	}
 	
-	public void closeConnection(){
+	private void closeConnection(){
 		try {
 			input.close();
 			output.close();
