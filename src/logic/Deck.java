@@ -1,5 +1,8 @@
 package logic;
 
+import java.awt.Image;
+import java.awt.ImageCapabilities;
+
 /**
  * A Deck of 52 cards, all cards in the game should be accessed from this deck
  */
