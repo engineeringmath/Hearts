@@ -7,6 +7,9 @@ Chand to nokte:
 
 ----------------------------------------------------------------
 
+!!! alireza farahani
+man be card o deck o table dast zadam!
+
 TODOs:
 
 GameLogic.java:
@@ -14,12 +17,15 @@ GameLogic.java:
 	-> playMove()
 	-> requestInfo()
 
+
+Alireza! man neveshtam inaro
 Table.java:
 	-> addCard()
 	-> getCardCount()
 	-> getTableCards()
 	-> clearTable()
-
+	
+Alireza! man neveshtam inaro
 Deck.java:
 	-> All of it
 
