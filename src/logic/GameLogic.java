@@ -25,6 +25,7 @@ public class GameLogic {
 	private Team[] teams;
 	private Player hakem;
 	private Table table;
+
 	private Suit hokm;
 	private int turn;
 	
@@ -72,4 +73,11 @@ public class GameLogic {
 		return null;
 	}
 	
+	public Table getTable() {
+		return table;
+	}
+	
+	public void setTable(Table table) {
+		this.table = table;
+	}
 }

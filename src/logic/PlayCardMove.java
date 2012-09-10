@@ -5,10 +5,15 @@ public class PlayCardMove implements Move {
 	private int suit;
 	private int playerNumber;
 	
+	//Clubs as 0
+	//Hearts as 1
+	//Diamonds as 2
+	//Spades as 3
 	public PlayCardMove(){
 		this.rank = 0;
 		this.suit = 0;
 	}
+	
 	
 	public PlayCardMove(int playerNumber, int rank, int suit){
 		this.playerNumber = playerNumber;

@@ -6,7 +6,6 @@ public class Table {
 	private Suit currentSuit;
 	private Map<Player, Card> cards;
 	
-	
 	/**
 	 * @return the current suit on the table, return null if no card exists on the table
 	 */
@@ -15,12 +14,21 @@ public class Table {
 	}
 	
 	/**
+	 * sets the current suit
+	 * @param currentSuit
+	 */
+	public void setCurrentSuit(Suit currentSuit) {
+		this.currentSuit = currentSuit;
+	}
+
+	/**
 	 * Adds a card to the table
 	 * @param player
 	 * @param card
 	 */
 	public void addCard(Player player, Card card){
 		// TODO
+		cards.put(player, card);
 	}
 	
 	/**
@@ -28,7 +36,7 @@ public class Table {
 	 */
 	public int getCardCount(){
 		// TODO
-		return 0;
+		return cards.size();
 	}
 	
 	/**
@@ -36,7 +44,7 @@ public class Table {
 	 */
 	public Card[] getTableCards(){
 		// TODO 
-		return null;
+		return cards.values().toArray(new Card[4]);
 	}
 	
 	/**
@@ -44,10 +52,9 @@ public class Table {
 	 * @return an array of the cards on the table before removing
 	 */
 	public Card[] clearTable(){
-		Card[] cards = getTableCards();
-		
 		// TODO
-		
+		Card[] cards = getTableCards();
+		this.cards.clear();
 		return cards;
 	}
 	
