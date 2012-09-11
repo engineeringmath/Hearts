@@ -31,7 +31,7 @@ public class Client{
 	}
 	
 	/**
-	 * get's the message from the server and decieds what to do next
+	 * gets the message from the server and decieds what to do next
 	 * 
 	 */
 	private void getMessage(MessageType message){
@@ -47,7 +47,7 @@ public class Client{
 	
 	
 	/**
-	 * get's the move of another player from the server and plays the move ( via the game instance )
+	 * gets the move of another player from the server and plays the move ( via the game instance )
 	 */
 	private void getServerMove(Move move){
 		
