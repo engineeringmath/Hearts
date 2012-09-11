@@ -18,7 +18,7 @@ import network.message.MessageType;
  * Set the return value to it's proper value:D
  */
 
-public class Client implements Callable<String>{
+public class Client{
 	private Game game;
 	private Socket socket;
 	private ObjectInputStream input;
@@ -26,7 +26,7 @@ public class Client implements Callable<String>{
 	private InetAddress ip;
 	
 	public Client(Game game){
-		this.ip = InetAddress.getLocalHost();
+		// make this inetAddress right
 		this.game = game;
 	}
 	
@@ -61,10 +61,5 @@ public class Client implements Callable<String>{
 		} catch (IOException e) {
 			System.err.println("Happened in client's close Connection");;
 		}
-	}
-
-	@Override
-	public String call() throws Exception {
-		return null;
 	}
 }

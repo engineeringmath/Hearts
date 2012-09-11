@@ -1,5 +1,7 @@
 package network;
 
+import game.Game;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
@@ -22,9 +24,10 @@ public class Server implements Callable<String>{
 	private ObjectInputStream input;
 	private int numberOfConnections;
 	private ArrayList<Socket> connections;
+	private Game game;
 	
-	public Server(){
-		
+	public Server(Game game){
+		this.game = game;
 	}
 	
 	/**
@@ -70,6 +73,10 @@ public class Server implements Callable<String>{
 	 * return , or send AbortMessage to clients to end the game in order the connection was lost
 	 */
 	private void checkConnection(){
+		
+	}
+	
+	public void sendCompressedGameState(){
 		
 	}
 	
