@@ -38,7 +38,7 @@ public class Client{
 		ms = new MulticastSocket(Statics.MULTICAST_SOCKET_PORT);
 		group = InetAddress.getByName(Statics.BROADCAST_GROUP_IP);
 		
-		// This might be object to Displacement due to implementation specifications of Game's Graphics
+		// This might be subject to Displacement due to implementation specifications of Game's Graphics
 		new Thread(){
 			
 			public void run() {

@@ -3,8 +3,8 @@ package network;
 import game.Game;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import logic.Move;
-
 import network.message.MessageType;
 
 
@@ -29,18 +28,18 @@ public class Server{
 	private Socket socket ;
 	private DatagramSocket broadcastSocket;
 	private ServerSocket server;
-	private HashMap<Socket, ObjectOutputStream>outputs;
-	private HashMap<Socket, ObjectInputStream> inputs;
+	private HashMap<Socket, OutputStream>outputs;
+	private HashMap<Socket, InputStream> inputs;
 	private ArrayList<Socket> connections;
 	private int numberOfConnections;
 	private InetAddress group;
 	private Game game;
 	
 	/** methods */
-	public Server(Game game) throws IOException{
+	public Server(Game game) throws IOException {
 		this.game 	 = game;
-		this.outputs = new HashMap<Socket, ObjectOutputStream>();
-		this.inputs  = new HashMap<Socket, ObjectInputStream>();
+		this.outputs = new HashMap<Socket, OutputStream>();
+		this.inputs  = new HashMap<Socket, InputStream>();
 		this.server  = new ServerSocket(Statics.SERVER_SOCKET_PORT);
 		
 		try {this.broadcastSocket = new DatagramSocket(Statics.DATAGRAM_SOCKET_PORT);} 
@@ -103,15 +102,14 @@ public class Server{
 					this.connection = connection;
 					return this;
 				}
-				public void run() {
+				public void run(){
 					try {
-						Server.this.outputs.put(connection, new ObjectOutputStream(connection.getOutputStream()));
-						Server.this.inputs.put(connection, new ObjectInputStream(connection.getInputStream()));
-						// TODO -> Create an object of class ProcessConnection and do the stuff ! 
+						Server.this.outputs.put(connection, connection.getOutputStream());
+						Server.this.inputs.put(connection, connection.getInputStream());
+						ProcessConnection pc = new ProcessConnection(connection, Server.this.connections);
 					}
-					catch (IOException e) {}
+					catch (IOException e) {System.err.println("startServer");}
 				}
-				
 			}.setConnection(connection).start();
 		}
 	}
