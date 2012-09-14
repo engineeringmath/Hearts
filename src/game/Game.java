@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Map;
+
 public class Game {
 	
 	public Game(){
@@ -17,5 +19,10 @@ public class Game {
 	//TODO
 	public int getPlayersCout(){
 		return 4;
+	}
+
+	//TODO
+	public void localServers(Map<String, String> serverInfo){
+		
 	}
 }

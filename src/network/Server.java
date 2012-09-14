@@ -15,32 +15,35 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import logic.Move;
+
 import network.message.MessageType;
 
 
 /**
- * 
  * @author alireza
- * Set the return value of method call to sth right :D
+ * 
  */
 public class Server{
 	/** private attributes */
 	private Socket socket ;
 	private DatagramSocket broadcastSocket;
 	private ServerSocket server;
-	private ObjectOutputStream output;
-	private ObjectInputStream input;
-	private int numberOfConnections;
+	private HashMap<Socket, ObjectOutputStream>outputs;
+	private HashMap<Socket, ObjectInputStream> inputs;
 	private ArrayList<Socket> connections;
+	private int numberOfConnections;
 	private InetAddress group;
 	private Game game;
 	
 	/** methods */
 	public Server(Game game) throws IOException{
-		this.game = game;
-		this.server = new ServerSocket(Statics.serverSocketPort);
+		this.game 	 = game;
+		this.outputs = new HashMap<Socket, ObjectOutputStream>();
+		this.inputs  = new HashMap<Socket, ObjectInputStream>();
+		this.server  = new ServerSocket(Statics.SERVER_SOCKET_PORT);
 		
-		try {this.broadcastSocket = new DatagramSocket(Statics.datagramSocketPort);} 
+		try {this.broadcastSocket = new DatagramSocket(Statics.DATAGRAM_SOCKET_PORT);} 
 		catch (SocketException e) { System.err.println("Initiating DatagramSocket /Server.java"); }
 		
 		new Thread(){
@@ -52,12 +55,12 @@ public class Server{
 					content.put("address", Server.this.server.getInetAddress().toString());
 					content.put("playersCount", Integer.toString(Server.this.game.getPlayersCout()));
 					
-					try {Server.this.group = InetAddress.getByName("231.0.0.1");} 
+					try {Server.this.group = InetAddress.getByName(Statics.BROADCAST_GROUP_IP);} 
 					catch (UnknownHostException e1){System.err.println("GROUP / Server.java");}
 					
 					byte [] broadcastMsg = StringSerializer.serialize(content);
 					
-					try {broadcastSocket.send(new DatagramPacket(broadcastMsg, broadcastMsg.length, Server.this.group, Statics.multicastSocketPort));}
+					try {broadcastSocket.send(new DatagramPacket(broadcastMsg, broadcastMsg.length, Server.this.group, Statics.MULTICAST_SOCKET_PORT));}
 					catch (IOException e1) {System.err.println("Sending broadcastMsg /Server.java");}
 					
 					try {Thread.sleep(500);}
@@ -85,14 +88,32 @@ public class Server{
 	}
 
 	public void startServer(){
-		new Thread(){
-
-			public void run() {
-				try {connections.add(server.accept());} 
-				catch (IOException e) {System.err.println("Server.accept StartServer/Server.java");}
-			}
-			
-		};
+		while(!game.isComplete()){
+			try {
+				Socket connection = server.accept();
+				connections.add(connection);
+			} 
+			catch (IOException e) {System.err.println("Server.accept StartServer/Server.java");}
+		}
+		
+		for(Socket connection : connections){
+			new Thread(){
+				Socket connection;
+				public Thread setConnection(Socket connection){
+					this.connection = connection;
+					return this;
+				}
+				public void run() {
+					try {
+						Server.this.outputs.put(connection, new ObjectOutputStream(connection.getOutputStream()));
+						Server.this.inputs.put(connection, new ObjectInputStream(connection.getInputStream()));
+						// TODO -> Create an object of class ProcessConnection and do the stuff ! 
+					}
+					catch (IOException e) {}
+				}
+				
+			}.setConnection(connection).start();
+		}
 	}
 	
 	/**
@@ -131,14 +152,6 @@ public class Server{
 		
 	}
 	
-	public ObjectOutputStream getOutput() {
-		return output;
-	}
-
-	public ObjectInputStream getInput() {
-		return input;
-	}
-
 	public int getNumberOfConnections() {
 		return numberOfConnections;
 	}
