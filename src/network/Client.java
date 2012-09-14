@@ -3,13 +3,12 @@ package network;
 import game.Game;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Map;
 
 import logic.Move;
@@ -28,8 +27,8 @@ public class Client{
 	private InetAddress group;
 	private Game game;
 	private Socket socket;
-	private ObjectInputStream input;
-	private ObjectOutputStream output;
+	private InputStream input;
+	private OutputStream output;
 	private InetAddress ip;
 	private boolean isConnected;
 	
@@ -58,15 +57,23 @@ public class Client{
 		String address = serverInfo.get("address");
 		try {
 			socket = new Socket(address, Statics.SERVER_SOCKET_PORT);
-			input  = new ObjectInputStream(socket.getInputStream());
-			output = new ObjectOutputStream(socket.getOutputStream());
+			input  = socket.getInputStream();
+			output = socket.getOutputStream();
 		}catch (IOException e) {System.err.println("Client.Init");}
+		
+		//
+		while(!socket.isClosed()){
+			try {
+//				Object recieved = input.readObject();	
+			}catch (Exception e) {System.err.println("Client.Recieve");}
+			
+		}
 		
 	}
 	
 	
 	/**
-	 * gets the message from the server and decieds what to do next
+	 * gets the message from the server and decides what to do next
 	 * 
 	 */
 	private void getMessage(MessageType message){
@@ -77,7 +84,9 @@ public class Client{
 	 * sends the fucking move to server :D
 	 */
 	public void sendMove(Move move){
-		
+//		try {
+//			output.write(move);
+//		catch (IOException e) {System.err.println("sendMove/ Client.java");}
 	}
 	
 	
@@ -85,7 +94,7 @@ public class Client{
 	 * gets the move of another player from the server and plays the move ( via the game instance )
 	 */
 	private void getServerMove(Move move){
-		
+		game.playMove(move);
 	}
 	
 	private void closeConnection(){
