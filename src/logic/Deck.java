@@ -18,7 +18,6 @@ public class Deck {
 	 * Create a set of deck and initialize every 52 cards.
 	 */
 	public Deck(){
-		// TODO initialize
 		int i = 0;
 		for (Suit s : Suit.values()) {
 			for (Rank r : Rank.values()) {
@@ -36,7 +35,6 @@ public class Deck {
 	 * @return selected card.
 	 */
 	public Card getCard(Rank rank, Suit suit){
-		// TODO
 		return cards[suit.getNumber()*13 + rank.getNumber()];
 //		for (Card c: cards) {
 //			if (c.getRank() == rank && c.getSuit() == suit)

@@ -14,8 +14,15 @@ TODOs:
 
 GameLogic.java:
 	-> checkMove()
-	-> playMove()
+	-> playMove()   
+			-> PlayCardMove
+			-> SelectHokmMove
+			-> SetHakemMove
 	-> requestInfo()
+			-> TurnRequest
+			-> HokmRequest
+			-> HakemRequest
+			-> StatsRequest  
 
 
 Alireza! man neveshtam inaro

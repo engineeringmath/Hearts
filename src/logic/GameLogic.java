@@ -1,5 +1,7 @@
 package logic;
 
+import logic.exception.CardNotFoundException;
+
 
 public class GameLogic {
 	private static GameLogic instance;
@@ -25,7 +27,8 @@ public class GameLogic {
 	private Team[] teams;
 	private Player hakem;
 	private Table table;
-
+	private Deck deck;
+	
 	private Suit hokm;
 	private int turn;
 	
@@ -37,10 +40,11 @@ public class GameLogic {
 		teams = new Team[2];
 		teams[0] = new Team(players[0], players[2]);
 		teams[1] = new Team(players[1], players[3]);
-		
+
 		hakem = null;
 		hokm = null;
 		turn = 0;
+		deck = new Deck();
 	}
 	
 	/**
@@ -49,17 +53,101 @@ public class GameLogic {
 	 * @return true if the move was valid, false otherwise
 	 */
 	public boolean checkMove(Move move){
-		// TODO
+		if(move instanceof PlayCardMove){
+			PlayCardMove pMove = (PlayCardMove)move;
+			
+			if(hakem == null || hokm == null)
+				return false;
+			if(pMove.getPlayerNumber() != turn)
+				return false;
+			
+			Player player = players[pMove.getPlayerNumber()];
+			if(table.getCurrentSuit() != null && 
+				pMove.getSuit() != table.getCurrentSuit()){
+				for(Card card : player.getCards())
+					if(card.getSuit() == pMove.getSuit())
+						return false;
+			}
+			
+			return true;
+		}else if(move instanceof SelectHokmMove){
+			SelectHokmMove sMove = (SelectHokmMove)move;
+			if(hokm != null)
+				return false;
+			return true;
+		}else if(move instanceof SetHakemMove){
+			SetHakemMove sMove = (SetHakemMove)move;
+			if(hakem != null)
+				return false;
+			return true;
+		}
+
 		return false;
 	}
 	
+
+	private boolean compare(Card card, Card highCard){
+		if(card.getSuit() == hokm)	{
+			if(highCard.getSuit() != hokm)
+				return true;
+			else if(card.getRank().compare(highCard.getRank()) > 0 )
+				return true;
+		}else if(card.getSuit() == table.getCurrentSuit()
+				 && card.getRank().compare(highCard.getRank()) > 0 ){
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Plays a move
 	 * @param move the move to play
 	 * @return true if the move was successful played, false otherwise
 	 */
 	public boolean playMove(Move move){
-		// TODO
+		if(move instanceof PlayCardMove){
+			PlayCardMove pMove = (PlayCardMove)move;
+			
+			Rank rank = pMove.getRank();
+			Suit suit = pMove.getSuit();
+			Player player = players[pMove.getPlayerNumber()];
+
+			// Take the card from the players hand
+			try {
+				player.takeCard(deck.getCard(rank,suit));
+			} catch (CardNotFoundException e) {
+				// Card wasn't in players hand
+				return false;
+			}
+			
+			// Add the card to the table
+			table.addCard(player, deck.getCard(rank,suit));
+			
+			if(table.getCardCount() == 4){ 
+				Card[] cards = table.getTableCards();
+				Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());
+				for(Card card : cards)
+					if(compare(card, highCard))
+						highCard = card;
+				
+				Player scorer = table.getCardPlayer(highCard);
+				scorer.getTeam().addPacksWon(cards);
+				table.clearTable();
+
+				if(scorer.getTeam().getSetsWon() == 7){
+					// GameOver
+				}
+			}
+
+
+		}else if(move instanceof SelectHokmMove){
+			SelectHokmMove sMove = (SelectHokmMove)move;
+			hokm = sMove.getSuit();
+
+		}else if(move instanceof SetHakemMove){
+			SetHakemMove sMove = (SetHakemMove)move;
+			hakem = players[sMove.getPlayerNumber()];
+		}
 		return false;
 	}
 	
