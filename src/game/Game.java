@@ -2,10 +2,17 @@ package game;
 
 import java.util.Map;
 
+import logic.Move;
+
 public class Game {
 	
 	public Game(){
 		
+	}
+	
+	//is needed for fucking network 
+	public void playMove(Move move){
+	//TODO
 	}
 
 	//XXX
