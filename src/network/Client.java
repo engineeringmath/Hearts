@@ -7,10 +7,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.concurrent.Callable;
+
+import network.message.MessageType;
 
 import logic.Move;
-import network.message.MessageType;
+
 
 /**
  * 
@@ -18,37 +19,42 @@ import network.message.MessageType;
  * Set the return value to it's proper value:D
  */
 
-public class Client implements Callable<String>{
+public class Client{
 	private Game game;
 	private Socket socket;
 	private ObjectInputStream input;
 	private ObjectOutputStream output;
 	private InetAddress ip;
 	
+	public Client(Game game){
+		// make this inetAddress right
+		this.game = game;
+	}
+	
 	/**
-	 * get's the message from the server and decieds what to do next
+	 * gets the message from the server and decieds what to do next
 	 * 
 	 */
-	public void getMessage(MessageType message){
+	private void getMessage(MessageType message){
 		
 	}
 	
 	/**
 	 * sends the fucking move to server :D
 	 */
-	public void sendMove(){
+	public void sendMove(Move move){
 		
 	}
 	
 	
 	/**
-	 * get's the move of another player from the server and plays the move ( via the game instance )
+	 * gets the move of another player from the server and plays the move ( via the game instance )
 	 */
-	public void getServerMove(Move move){
+	private void getServerMove(Move move){
 		
 	}
 	
-	public void closeConnection(){
+	private void closeConnection(){
 		try {
 			input.close();
 			output.close();
@@ -56,10 +62,5 @@ public class Client implements Callable<String>{
 		} catch (IOException e) {
 			System.err.println("Happened in client's close Connection");;
 		}
-	}
-
-	@Override
-	public String call() throws Exception {
-		return null;
 	}
 }

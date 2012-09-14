@@ -107,7 +107,7 @@ public class GameLogic {
 			hakem = players[sMove.getPlayerNumber()];
 			
 		}else if(move instanceof DealCardsMove){
-			DealCardsMove dMove = (DealCardsMove)dMove;
+			DealCardsMove dMove = (DealCardsMove)move;
 			dealCards(dMove.getRandomSeed());
 		}
 		return false;
