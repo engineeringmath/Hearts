@@ -84,18 +84,7 @@ public class GameLogic {
 	}
 	
 
-	private boolean compare(Card card, Card highCard){
-		if(card.getSuit() == hokm)	{
-			if(highCard.getSuit() != hokm)
-				return true;
-			else if(card.getRank().compare(highCard.getRank()) > 0 )
-				return true;
-		}else if(card.getSuit() == table.getCurrentSuit()
-				 && card.getRank().compare(highCard.getRank()) > 0 ){
-			return true;
-		}
-		return false;
-	}
+	
 
 	/**
 	 * Plays a move
@@ -103,48 +92,23 @@ public class GameLogic {
 	 * @return true if the move was successful played, false otherwise
 	 */
 	public boolean playMove(Move move){
+		if(!checkMove(move))
+			return false;
+		
 		if(move instanceof PlayCardMove){
-			PlayCardMove pMove = (PlayCardMove)move;
+			return playCardMove((PlayCardMove)move);
 			
-			Rank rank = pMove.getRank();
-			Suit suit = pMove.getSuit();
-			Player player = players[pMove.getPlayerNumber()];
-
-			// Take the card from the players hand
-			try {
-				player.takeCard(deck.getCard(rank,suit));
-			} catch (CardNotFoundException e) {
-				// Card wasn't in players hand
-				return false;
-			}
-			
-			// Add the card to the table
-			table.addCard(player, deck.getCard(rank,suit));
-			
-			if(table.getCardCount() == 4){ 
-				Card[] cards = table.getTableCards();
-				Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());
-				for(Card card : cards)
-					if(compare(card, highCard))
-						highCard = card;
-				
-				Player scorer = table.getCardPlayer(highCard);
-				scorer.getTeam().addPacksWon(cards);
-				table.clearTable();
-
-				if(scorer.getTeam().getSetsWon() == 7){
-					// GameOver
-				}
-			}
-
-
 		}else if(move instanceof SelectHokmMove){
 			SelectHokmMove sMove = (SelectHokmMove)move;
 			hokm = sMove.getSuit();
-
+			
 		}else if(move instanceof SetHakemMove){
 			SetHakemMove sMove = (SetHakemMove)move;
 			hakem = players[sMove.getPlayerNumber()];
+			
+		}else if(move instanceof DealCardsMove){
+			DealCardsMove dMove = (DealCardsMove)dMove;
+			dealCards(dMove.getRandomSeed());
 		}
 		return false;
 	}
@@ -157,6 +121,58 @@ public class GameLogic {
 	public GameInfo requestInfo(InfoRequest infoRequest){
 		// TODO
 		return null;
+	}
+	
+	private void dealCards(int randomSeed){
+		
+	}
+	
+	private boolean compare(Card card, Card highCard){
+		if(card.getSuit() == hokm)	{
+			if(highCard.getSuit() != hokm)
+				return true;
+			else if(card.getRank().compare(highCard.getRank()) > 0 )
+				return true;
+		}else if(card.getSuit() == table.getCurrentSuit()
+				 && card.getRank().compare(highCard.getRank()) > 0 ){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean playCardMove(PlayCardMove pMove){
+		Rank rank = pMove.getRank();
+		Suit suit = pMove.getSuit();
+		Player player = players[pMove.getPlayerNumber()];
+
+		// Take the card from the players hand
+		try {
+			player.takeCard(deck.getCard(rank,suit));
+		} catch (CardNotFoundException e) {
+			// Card wasn't in players hand
+			return false;
+		}
+		
+		// Add the card to the table
+		table.addCard(player, deck.getCard(rank,suit));
+		
+		if(table.getCardCount() == 4){ 
+			Card[] cards = table.getTableCards();
+			Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());
+			for(Card card : cards)
+				if(compare(card, highCard))
+					highCard = card;
+			
+			Player scorer = table.getCardPlayer(highCard);
+			scorer.getTeam().addPacksWon(cards);
+			table.clearTable();
+
+			if(scorer.getTeam().getSetsWon() == 7){
+				// GameOver
+			}
+		}
+		
+		return true;
 	}
 	
 	public Table getTable() {
