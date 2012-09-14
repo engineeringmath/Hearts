@@ -32,9 +32,9 @@ public class ProcessConnection {
 	private void handleConnection() {
 		while(!connection.isClosed()){
 			try {
-				compileMsg(input.readObject());
+				compileMsg(input.read());
 			}
-			catch (ClassNotFoundException | IOException e) {System.err.println("handleConnection / ProcessConnection.java");}
+			catch (IOException e) {System.err.println("handleConnection / ProcessConnection.java");}
 		}
 	}
 	
