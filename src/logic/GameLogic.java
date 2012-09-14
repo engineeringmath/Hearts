@@ -78,6 +78,8 @@ public class GameLogic {
 			if(hakem != null)
 				return false;
 			return true;
+		}else if (move instanceof DealCardsMove){
+			return true; // Dunno
 		}
 
 		return false;
@@ -124,7 +126,8 @@ public class GameLogic {
 	}
 	
 	private void dealCards(int randomSeed){
-		
+		Card[] cards = deck.shuffle(randomSeed);
+		int i = 0;
 	}
 	
 	private boolean compare(Card card, Card highCard){
