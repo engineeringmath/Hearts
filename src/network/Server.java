@@ -2,32 +2,70 @@ package network;
 
 import game.Game;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
+import java.util.HashMap;
 
-import logic.Move;
 import network.message.MessageType;
+
 
 /**
  * 
  * @author alireza
  * Set the return value of method call to sth right :D
  */
-public class Server implements Callable<String>{
+public class Server{
+	/** private attributes */
 	private Socket socket ;
+	private DatagramSocket broadcastSocket;
 	private ServerSocket server;
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private int numberOfConnections;
 	private ArrayList<Socket> connections;
+	private InetAddress group;
 	private Game game;
 	
-	public Server(Game game){
+	/** methods */
+	public Server(Game game) throws IOException{
 		this.game = game;
+		this.server = new ServerSocket(Statics.serverSocketPort);
+		
+		try {this.broadcastSocket = new DatagramSocket(Statics.datagramSocketPort);} 
+		catch (SocketException e) { System.err.println("Initiating DatagramSocket /Server.java"); }
+		
+		new Thread(){
+			
+			public void run() {
+				while(!Server.this.game.isComplete()){
+					HashMap<String, String> content = new HashMap<String, String>();
+					content.put("name", Server.this.game.getPlayerName());
+					content.put("address", Server.this.server.getInetAddress().toString());
+					content.put("playersCount", Integer.toString(Server.this.game.getPlayersCout()));
+					
+					try {Server.this.group = InetAddress.getByName("231.0.0.1");} 
+					catch (UnknownHostException e1){System.err.println("GROUP / Server.java");}
+					
+					byte [] broadcastMsg = StringSerializer.serialize(content);
+					
+					try {broadcastSocket.send(new DatagramPacket(broadcastMsg, broadcastMsg.length, Server.this.group, Statics.multicastSocketPort));}
+					catch (IOException e1) {System.err.println("Sending broadcastMsg /Server.java");}
+					
+					try {Thread.sleep(500);}
+					catch (InterruptedException e) {System.err.println("SLEEP/Server.java");}
+				}
+				};
+			}.start();
+			this.startServer();
 	}
 	
 	/**
@@ -46,9 +84,15 @@ public class Server implements Callable<String>{
 		
 	}
 
-	@Override
-	public String call() throws Exception {
-		return null;
+	public void startServer(){
+		new Thread(){
+
+			public void run() {
+				try {connections.add(server.accept());} 
+				catch (IOException e) {System.err.println("Server.accept StartServer/Server.java");}
+			}
+			
+		};
 	}
 	
 	/**
