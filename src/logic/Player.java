@@ -26,6 +26,14 @@ public class Player {
 	}
 	
 	/**
+	 * Gives a card to the player
+	 * @param the card to give
+	 */
+	public void giveCard(Card card){
+		this.cards.add(card);
+	}
+	
+	/**
 	 * Takes a card from the players hand
 	 * @param card the card to take
 	 * @throws CardNotFoundException is thrown if such a card does not exist in the players hand

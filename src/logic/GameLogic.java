@@ -85,9 +85,6 @@ public class GameLogic {
 		return false;
 	}
 	
-
-	
-
 	/**
 	 * Plays a move
 	 * @param move the move to play
@@ -128,6 +125,8 @@ public class GameLogic {
 	private void dealCards(int randomSeed){
 		Card[] cards = deck.shuffle(randomSeed);
 		int i = 0;
+		for(Card card : cards)
+			players[(i++)%4].giveCard(card);
 	}
 	
 	private boolean compare(Card card, Card highCard){
@@ -178,11 +177,42 @@ public class GameLogic {
 		return true;
 	}
 	
+	
+	public void updateTurn(){
+		turn++;
+		if (turn > 4) turn -= 4;
+	}
+
+	// --------- GET & SET ---------
+	
 	public Table getTable() {
 		return table;
 	}
 	
 	public void setTable(Table table) {
 		this.table = table;
+	}
+	
+	public Team[] getTeams() {
+		return teams;
+	}
+
+	public int getTurn(){
+		return turn;
+	}
+	public Player getHakem() {
+		return hakem;
+	}
+	
+	public void setHakem(Player hakem) {
+		this.hakem = hakem;
+	}
+	
+	public Suit getHokm() {
+		return hokm;
+	}
+	
+	public void setHokm(Suit hokm) {
+		this.hokm = hokm;
 	}
 }
