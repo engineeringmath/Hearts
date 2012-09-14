@@ -1,19 +1,19 @@
 package logic;
 
 public enum Rank {
-	Ace(0),
-	Two(1),
-	Three(2),
-	Four(3),
-	Five(4),
-	Six(5),
-	Seven(6),
-	Eight(7),
-	Nine(8),
-	Ten(9),
-	Jack(10),
-	Queen(11),
-	King(12);
+	Two(0),
+	Three(1),
+	Four(2),
+	Five(3),
+	Six(4),
+	Seven(5),
+	Eight(6),
+	Nine(7),
+	Ten(8),
+	Jack(9),
+	Queen(10),
+	King(11),
+	Ace(12);
 	
 	private Rank(int number){
 		this.number = number;
@@ -22,5 +22,13 @@ public enum Rank {
 	private int number;
 	public int getNumber(){
 		return this.number;
+	}
+
+	public int compare(Rank rank){	
+		return (this.number > rank.number ? 1 : (this.number == rank.number ? 0 : -1));  
+	}
+	
+	public static Rank getRank(int number){
+		return Rank.values()[number];
 	}
 }

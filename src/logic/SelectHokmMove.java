@@ -1,26 +1,22 @@
 package logic;
 
 public class SelectHokmMove implements Move{
-	private int rank;	// rank as hokm!
+	private Suit suit;	// rank as hokm!
 	//Clubs as 1
 	//Hearts as 2
 	//Diamonds as 3
 	//Spades as 4
 	
-	public SelectHokmMove() {
-		this.rank = 0;
+	public SelectHokmMove(Suit rank) {
+		this.suit = rank;
 	}
 
-	public SelectHokmMove(int rank) {
-		this.rank = rank;
+	public Suit getSuit() {
+		return suit;
 	}
 
-	
-	public int getRank() {
-		return rank;
+	public void setSuit(Suit rank) {
+		this.suit = rank;
 	}
 
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
 }

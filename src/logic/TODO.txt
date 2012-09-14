@@ -10,13 +10,28 @@ Chand to nokte:
 !!! alireza farahani
 man be card o deck o table dast zadam!
 
-TODOs:
 
+@alireza: check Team.java
+
+----------------------------------------------------------------
+TODOs:
+	-> requestInfo()
+			-> TurnRequest
+			-> HokmRequest
+			-> HakemRequest
+			-> StatsRequest  
+
+
+
+-------------- DONE --------------
+
+Hadi
 GameLogic.java:
 	-> checkMove()
-	-> playMove()
-	-> requestInfo()
-
+	-> playMove()   
+			-> PlayCardMove
+			-> SelectHokmMove
+			-> SetHakemMove
 
 Alireza! man neveshtam inaro
 Table.java:

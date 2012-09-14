@@ -16,13 +16,12 @@ public class Player {
 		this.name = name;
 	}
 
-	// @hadi: I think you write it wrong. I changed for(Card c : cards) to for(card c: card)
 	/**
 	 * Gives a number of cards to the player
 	 * @param card an array of the cards to give
 	 */
 	public void giveCards(Card[] card){
-		for(Card c : card)
+		for(Card c : cards)
 			this.cards.add(c);
 	}
 	
