@@ -1,4 +1,4 @@
-  List karhayi ke bayad anjam beshe ro too in file mizarim
+List karhayi ke bayad anjam beshe ro too in file mizarim
 
 Chand to nokte:
 -> Vase in karha ham moshakhas nemkonim ke ki chikar kone, har ki harkodum az ina ro ke hal kard vardare bezane (ghablesh chek kone ke kase dgei nezade bashe)
@@ -7,19 +7,32 @@ Chand to nokte:
 
 ----------------------------------------------------------------
 
+!!! alireza farahani
+man be card o deck o table dast zadam!
+
 TODOs:
 
 GameLogic.java:
 	-> checkMove()
-	-> playMove()
+	-> playMove()   
+			-> PlayCardMove
+			-> SelectHokmMove
+			-> SetHakemMove
 	-> requestInfo()
+			-> TurnRequest
+			-> HokmRequest
+			-> HakemRequest
+			-> StatsRequest  
 
+
+Alireza! man neveshtam inaro
 Table.java:
 	-> addCard()
 	-> getCardCount()
 	-> getTableCards()
 	-> clearTable()
-
+	
+Alireza! man neveshtam inaro
 Deck.java:
 	-> All of it
 
