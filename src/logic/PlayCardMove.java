@@ -1,11 +1,21 @@
 package logic;
 
 public class PlayCardMove implements Move {
-	private Rank rank;
-	private Suit suit;
+	private int rank;
+	private int suit;
 	private int playerNumber;
 	
-	public PlayCardMove(int playerNumber, Rank rank, Suit suit){
+	//Clubs as 0
+	//Hearts as 1
+	//Diamonds as 2
+	//Spades as 3
+	public PlayCardMove(){
+		this.rank = 0;
+		this.suit = 0;
+	}
+	
+	
+	public PlayCardMove(int playerNumber, int rank, int suit){
 		this.playerNumber = playerNumber;
 		this.rank = rank;
 		this.suit = suit;
@@ -14,28 +24,28 @@ public class PlayCardMove implements Move {
 	/**
 	 * @return the rank
 	 */
-	public Rank getRank() {
+	public int getRank() {
 		return rank;
 	}
 
 	/**
 	 * @param rank the rank to set
 	 */
-	public void setRank(Rank rank) {
+	public void setRank(int rank) {
 		this.rank = rank;
 	}
 
 	/**
 	 * @return the suit
 	 */
-	public Suit getSuit() {
+	public int getSuit() {
 		return suit;
 	}
 
 	/**
 	 * @param suit the suit to set
 	 */
-	public void setSuit(Suit suit) {
+	public void setSuit(int suit) {
 		this.suit = suit;
 	}
 

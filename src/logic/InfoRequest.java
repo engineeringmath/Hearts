@@ -1,8 +1,8 @@
 package logic;
 
 public enum InfoRequest {
-	TurnRequest,
-	HokmRequest,
-	HakemRequest,
-	StatsRequest;
+	turnRequest,
+	hokmRequest,
+	hakemRequest,
+	statsRequest;
 }

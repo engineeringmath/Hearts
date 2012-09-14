@@ -14,10 +14,6 @@ public enum Suit {
 	public int getNumber(){
 		return num;
 	}
-	
-	public static Suit getSuit(int number){
-		return Suit.values()[number];
-	}
 }
 
 

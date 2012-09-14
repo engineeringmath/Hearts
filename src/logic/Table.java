@@ -27,8 +27,7 @@ public class Table {
 	 * @param card
 	 */
 	public void addCard(Player player, Card card){
-		if(cards.isEmpty())
-			setCurrentSuit(card.getSuit());
+		// TODO
 		cards.put(player, card);
 	}
 	
@@ -36,6 +35,7 @@ public class Table {
 	 * @return number of players who played a card on the table
 	 */
 	public int getCardCount(){
+		// TODO
 		return cards.size();
 	}
 	
@@ -43,6 +43,7 @@ public class Table {
 	 * @return an array of the cards on the table
 	 */
 	public Card[] getTableCards(){
+		// TODO 
 		return cards.values().toArray(new Card[4]);
 	}
 	
@@ -51,9 +52,9 @@ public class Table {
 	 * @return an array of the cards on the table before removing
 	 */
 	public Card[] clearTable(){
+		// TODO
 		Card[] cards = getTableCards();
 		this.cards.clear();
-		setCurrentSuit(null);
 		return cards;
 	}
 	
@@ -63,16 +64,5 @@ public class Table {
 	public Map<Player, Card> getCardMap() {
 		return cards;
 	}
-
-	/**
-	 * Give the player which has played the given card
-	 * @return If the given card is on the table, the Player which has played that card, otherwise null
-	 */
-	public Player getCardPlayer(Card card){
-		for(Player player : cards.keySet()){
-			if(card.equals(cards.get(player)))
-				return player;
-		}
-		return null;
-	}
+	
 }
