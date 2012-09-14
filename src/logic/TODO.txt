@@ -1,0 +1,46 @@
+List karhayi ke bayad anjam beshe ro too in file mizarim
+
+Chand to nokte:
+-> Vase in karha ham moshakhas nemkonim ke ki chikar kone, har ki harkodum az ina ro ke hal kard vardare bezane (ghablesh chek kone ke kase dgei nezade bashe)
+-> Har kari ro ke anjam dadi too in file jolo oon kar begoo ke tamum shode o esme khodeto benvis. Age ham kare toolaniye o tool mikeshe o nemkhay vasatash yeki dge byad oon karo shoro kone dastkari kardan, jolosh benvis ke dari in karo anjam midi
+-> Too anjame in kara dastet baze, yani faghat mahdud be oon ghesmat code i ke dari taghir midi nisti (valli mahdud be package logic hasti). Maslan mituni age lazem dari tabe ezafe koni be class haye mokhtalef o ina, hata mituni tabehayi ke ezafe mikoni ro pyade sazi nakoni o TODO koni o byay inja list konita yeki dge pyade sazi kone ya khodet badan pyade sazi koni
+
+----------------------------------------------------------------
+
+!!! alireza farahani
+man be card o deck o table dast zadam!
+
+
+@alireza: check Team.java
+
+----------------------------------------------------------------
+TODOs:
+	-> requestInfo()
+			-> TurnRequest
+			-> HokmRequest
+			-> HakemRequest
+			-> StatsRequest  
+
+
+
+-------------- DONE --------------
+
+Hadi
+GameLogic.java:
+	-> checkMove()
+	-> playMove()   
+			-> PlayCardMove
+			-> SelectHokmMove
+			-> SetHakemMove
+
+Alireza! man neveshtam inaro
+Table.java:
+	-> addCard()
+	-> getCardCount()
+	-> getTableCards()
+	-> clearTable()
+	
+Alireza! man neveshtam inaro
+Deck.java:
+	-> All of it
+

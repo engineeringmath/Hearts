@@ -1,6 +1,6 @@
 package logic;
 
-import logic.exception.CardNotFoundException;
+import java.util.Random;
 
 /**
  * A Deck of 52 cards, all cards in the game should be accessed from this deck
@@ -41,5 +41,20 @@ public class Deck {
 //				return c;
 //		}
 		//throw new CardNotFoundException();   ???
+	}
+	
+	public Card[] shuffle(int seed){
+		Card[] shuffledCards = new Card[52];
+		Random rnd = new Random(seed);
+		for(int i = 0; i < cards.length; i++){
+			shuffledCards[i] = cards[i];
+		}
+		for(int i = 0; i < shuffledCards.length; i++){
+			int r = rnd.nextInt(shuffledCards.length);
+			Card tmp = shuffledCards[i];
+			shuffledCards[i] = shuffledCards[r];
+			shuffledCards[r] = tmp;
+		}
+		return shuffledCards;
 	}
 }
