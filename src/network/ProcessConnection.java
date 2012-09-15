@@ -39,9 +39,7 @@ public class ProcessConnection {
 	}
 	
 	private void compileMsg(Object obj){
-		if (obj instanceof Move)
-			writeToAll((Move)obj);
-		// TODO -> Other kinds of messages
+		// TODO -> Distinguish stuff
 	}
 	
 	private void writeToAll(Move move){
