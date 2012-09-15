@@ -1,5 +1,9 @@
 package logic;
 
-public interface Move {
+public abstract class Move {
+	abstract public byte[] serialize();
 	
+	public static Move deserialize(byte[] bytes){
+		return null; 
+	}
 }

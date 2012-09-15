@@ -10,13 +10,34 @@ Chand to nokte:
 !!! alireza farahani
 man be card o deck o table dast zadam!
 
-TODOs:
 
+@alireza: check Team.java
+
+--
+NEW!!! @hadi: check the team.java and GameLogic.java and read the comment I have written.
+DealCards naghese! chi bayad daghighan besh ezafe she?
+correct the bug in Gamelogic.compare()
+make the get methods of packsWonInfo and playersCardsInfo.
+
+----------------------------------------------------------------
+TODOs:
+	-> requestInfo()
+			-> TurnRequest
+			-> HokmRequest
+			-> HakemRequest
+			-> StatsRequest  
+
+
+
+-------------- DONE --------------
+
+Hadi
 GameLogic.java:
 	-> checkMove()
-	-> playMove()
-	-> requestInfo()
-
+	-> playMove()   
+			-> PlayCardMove
+			-> SelectHokmMove
+			-> SetHakemMove
 
 Alireza! man neveshtam inaro
 Table.java:

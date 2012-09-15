@@ -1,6 +1,6 @@
 package logic;
 
-import logic.exception.CardNotFoundException;
+import java.util.Random;
 
 /**
  * A Deck of 52 cards, all cards in the game should be accessed from this deck
@@ -18,7 +18,6 @@ public class Deck {
 	 * Create a set of deck and initialize every 52 cards.
 	 */
 	public Deck(){
-		// TODO initialize
 		int i = 0;
 		for (Suit s : Suit.values()) {
 			for (Rank r : Rank.values()) {
@@ -36,12 +35,26 @@ public class Deck {
 	 * @return selected card.
 	 */
 	public Card getCard(Rank rank, Suit suit){
-		// TODO
 		return cards[suit.getNumber()*13 + rank.getNumber()];
 //		for (Card c: cards) {
 //			if (c.getRank() == rank && c.getSuit() == suit)
 //				return c;
 //		}
 		//throw new CardNotFoundException();   ???
+	}
+	
+	public Card[] shuffle(int seed){
+		Card[] shuffledCards = new Card[52];
+		Random rnd = new Random(seed);
+		for(int i = 0; i < cards.length; i++){
+			shuffledCards[i] = cards[i];
+		}
+		for(int i = 0; i < shuffledCards.length; i++){
+			int r = rnd.nextInt(shuffledCards.length);
+			Card tmp = shuffledCards[i];
+			shuffledCards[i] = shuffledCards[r];
+			shuffledCards[r] = tmp;
+		}
+		return shuffledCards;
 	}
 }
