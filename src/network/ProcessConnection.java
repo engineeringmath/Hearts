@@ -39,7 +39,7 @@ public class ProcessConnection {
 	}
 	
 	private void compileMsg(Object obj){
-		// TODO -> Distinguish stuff
+		
 	}
 	
 	private void writeToAll(Move move){

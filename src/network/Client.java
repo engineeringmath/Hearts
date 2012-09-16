@@ -9,6 +9,8 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import logic.Move;
@@ -32,7 +34,7 @@ public class Client{
 	private InetAddress ip;
 	private boolean isConnected;
 	
-	public Client(Game game) throws IOException{
+	public Client(Game game) throws IOException {
 		this.game = game;
 		ms = new MulticastSocket(Statics.MULTICAST_SOCKET_PORT);
 		group = InetAddress.getByName(Statics.BROADCAST_GROUP_IP);
