@@ -1,6 +1,7 @@
 package logic;
 
-public class DealCardsMove implements Move {
+
+public class DealCardsMove extends Move {
 	private int randomSeed;
 	
 	public DealCardsMove(int randomSeed){
@@ -9,5 +10,11 @@ public class DealCardsMove implements Move {
 	
 	public int getRandomSeed(){
 		return randomSeed;
+	}
+
+	@Override
+	public byte[] serialize() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

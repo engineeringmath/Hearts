@@ -4,5 +4,8 @@ public enum InfoRequest {
 	TurnRequest,
 	HokmRequest,
 	HakemRequest,
-	StatsRequest;
+	TableRequest,
+	PacksWonRequest,
+	RoundsWonRequest,
+	PlayersCardsRequest,
 }

@@ -1,6 +1,6 @@
 package logic;
 
-public class PlayCardMove implements Move {
+public class PlayCardMove extends Move {
 	private Rank rank;
 	private Suit suit;
 	private int playerNumber;
@@ -51,6 +51,13 @@ public class PlayCardMove implements Move {
 	 */
 	public void setPlayerNumber(int playerNumber) {
 		this.playerNumber = playerNumber;
+	}
+
+	@Override
+	public byte[] serialize() {
+		// TODO Auto-generated method stub
+		return null;
+
 	}
 	
 	

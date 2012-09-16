@@ -64,12 +64,15 @@ public class GameLogic {
 			Player player = players[pMove.getPlayerNumber()];
 			if(table.getCurrentSuit() != null && 
 				pMove.getSuit() != table.getCurrentSuit()){
-				for(Card card : player.getCards())
+				for(Card card : player.getCards())				// checks if player is able to cut or pass(!)
 					if(card.getSuit() == pMove.getSuit())
 						return false;
 			}
 			
 			return true;
+			
+//			I was confused whether to check the correctness of setHakem here or in GameLogic. i changed the selectHokm (tu range budane shomare)	
+
 		}else if(move instanceof SelectHokmMove){
 			if(hokm != null)
 				return false;
@@ -129,7 +132,9 @@ public class GameLogic {
 			players[(i++)%4].giveCard(card);
 	}
 	
-	private boolean compare(Card card, Card highCard){
+	// highCard is confusing. OhterCard is better. how about dominance instead of compare??
+	// IMPORTANT. @hadi: it doesn't support the situation that sb pass some carts on a none hokm card. (rad dadan ruye cardi ke hokm nist)
+	private boolean compare(Card card, Card highCard){	
 		if(card.getSuit() == hokm)	{
 			if(highCard.getSuit() != hokm)
 				return true;
@@ -160,7 +165,8 @@ public class GameLogic {
 		
 		if(table.getCardCount() == 4){ 
 			Card[] cards = table.getTableCards();
-			Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());
+			Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());		
+			// choosing the most powerful card on the table
 			for(Card card : cards)
 				if(compare(card, highCard))
 					highCard = card;
@@ -169,7 +175,12 @@ public class GameLogic {
 			scorer.getTeam().addPacksWon(cards);
 			table.clearTable();
 
-			if(scorer.getTeam().getSetsWon() == 7){
+			
+			// @hadi: correct this.
+			// if (scorer.getTeam().getpacksWon() == 7) --> daste jadide bazi badesh packs won sefr.
+			// if (scorer.getTeam().getRoundsWon() == 7) --> game over. 	
+			
+			if(scorer.getTeam().getRoundsWon() == 7){
 				// GameOver
 			}
 		}
@@ -189,10 +200,6 @@ public class GameLogic {
 		return table;
 	}
 	
-	public void setTable(Table table) {
-		this.table = table;
-	}
-	
 	public Team[] getTeams() {
 		return teams;
 	}
@@ -204,15 +211,7 @@ public class GameLogic {
 		return hakem;
 	}
 	
-	public void setHakem(Player hakem) {
-		this.hakem = hakem;
-	}
-	
 	public Suit getHokm() {
 		return hokm;
-	}
-	
-	public void setHokm(Suit hokm) {
-		this.hokm = hokm;
 	}
 }
