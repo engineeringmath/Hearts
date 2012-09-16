@@ -23,6 +23,7 @@ public class SelectHokmMove extends Move{
 	public byte[] serialize() {
 		// TODO Auto-generated method stub
 		return null;
+
 	}
 
 }

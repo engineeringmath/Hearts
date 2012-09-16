@@ -1,5 +1,6 @@
 package logic;
 
+
 public class DealCardsMove extends Move {
 	private int randomSeed;
 	

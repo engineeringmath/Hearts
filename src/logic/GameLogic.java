@@ -72,6 +72,7 @@ public class GameLogic {
 			return true;
 			
 //			I was confused whether to check the correctness of setHakem here or in GameLogic. i changed the selectHokm (tu range budane shomare)	
+
 		}else if(move instanceof SelectHokmMove){
 			if(hokm != null)
 				return false;

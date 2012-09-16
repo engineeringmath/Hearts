@@ -7,5 +7,5 @@ public enum InfoRequest {
 	TableRequest,
 	PacksWonRequest,
 	RoundsWonRequest,
-	PlayersCardsRequest;
+	PlayersCardsRequest,
 }
