@@ -20,7 +20,9 @@ TODOs:
 			-> HokmRequest
 			-> HakemRequest
 			-> StatsRequest  
-
+	-> Move
+			-> serialize
+			-> deserialize
 
 
 -------------- DONE --------------
