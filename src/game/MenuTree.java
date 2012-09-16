@@ -1,3 +1,5 @@
+package game;
+
 public class MenuTree {
 	public static void main(String[] args) {
 		MenuNode login = new MenuNode(null, "Login");
