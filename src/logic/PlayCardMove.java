@@ -1,5 +1,7 @@
 package logic;
 
+import java.nio.ByteBuffer;
+
 public class PlayCardMove extends Move {
 	private Rank rank;
 	private Suit suit;
@@ -11,6 +13,23 @@ public class PlayCardMove extends Move {
 		this.suit = suit;
 	}
 
+	protected byte[] toBytes() {
+		return new byte[]{
+			(byte)playerNumber, 
+			(byte)rank.getNumber(),
+			(byte)suit.getNumber()
+		};
+	}
+	
+	public static Move fromBytes(byte[] bytes){
+		ByteBuffer buff = ByteBuffer.wrap(bytes);
+		int playerNumber = buff.get();
+		Rank rank = Rank.fromNumber(buff.get());
+		Suit suit = Suit.fromNumber(buff.get());
+		return new PlayCardMove(playerNumber, rank, suit);
+	}
+	
+	
 	/**
 	 * @return the rank
 	 */
@@ -53,12 +72,5 @@ public class PlayCardMove extends Move {
 		this.playerNumber = playerNumber;
 	}
 
-	@Override
-	public byte[] serialize() {
-		// TODO Auto-generated method stub
-		return null;
-
-	}
-	
 	
 }

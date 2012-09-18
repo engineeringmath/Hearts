@@ -19,11 +19,4 @@ public class SelectHokmMove extends Move{
 		this.suit = rank;
 	}
 
-	@Override
-	public byte[] serialize() {
-		// TODO Auto-generated method stub
-		return null;
-
-	}
-
 }

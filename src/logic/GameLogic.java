@@ -1,5 +1,6 @@
 package logic;
 
+import game.GameState;
 import logic.exception.CardNotFoundException;
 
 
@@ -106,8 +107,9 @@ public class GameLogic {
 			
 		}else if(move instanceof SetHakemMove){
 			SetHakemMove sMove = (SetHakemMove)move;
+			if(sMove.getPlayerNumber()<0 || sMove.getPlayerNumber()>3)
+			   return false;	
 			hakem = players[sMove.getPlayerNumber()];
-			
 		}else if(move instanceof DealCardsMove){
 			DealCardsMove dMove = (DealCardsMove)move;
 			dealCards(dMove.getRandomSeed());
@@ -115,13 +117,40 @@ public class GameLogic {
 		return false;
 	}
 	
+	public void syncGameState(GameState g){
+			
+	}
+
 	/**
 	 * Returns some requested information on the current state of the game
 	 * @param infoRequest defines the information to be returned
 	 * @return an instance of GameInfo containing the requested information
 	 */
-	public GameInfo requestInfo(InfoRequest infoRequest){
-		// TODO
+	public GameInfo requestInfo(InfoRequest infoRequest, Object... params){
+		switch(infoRequest){
+			case TurnRequest:
+				TurnInfo tu = new TurnInfo(this.turn);
+				return tu;
+			case HokmRequest:
+				HokmInfo ho = new HokmInfo(this.hokm);
+				return ho;
+			case HakemRequest:
+				HakemInfo ha = new HakemInfo(this.hakem);
+				return ha;
+			case TableRequest:
+				TableInfo ta = new TableInfo(this.table);
+				return ta;
+			case PacksWonRequest:
+				Integer param = (Integer) params[0];
+				if (param == 0){
+					PacksWonInfo pa = new PacksWonInfo(this.teams[0].getPacksWon());
+					return pa;
+				}else if(param == 1){
+					PacksWonInfo pa = new PacksWonInfo(this.teams[1].getPacksWon());
+					return pa;
+				}
+				break;
+		}
 		return null;
 	}
 	
@@ -132,15 +161,14 @@ public class GameLogic {
 			players[(i++)%4].giveCard(card);
 	}
 	
-	// highCard is confusing. OhterCard is better. how about dominance instead of compare??
-	// IMPORTANT. @hadi: it doesn't support the situation that sb pass some carts on a none hokm card. (rad dadan ruye cardi ke hokm nist)
-	private boolean compare(Card card, Card highCard){	
+	private boolean dominance(Card card, Card highCard){	
 		if(card.getSuit() == hokm)	{
 			if(highCard.getSuit() != hokm)
 				return true;
 			else if(card.getRank().compare(highCard.getRank()) > 0 )
 				return true;
 		}else if(card.getSuit() == table.getCurrentSuit()
+				 && highCard.getSuit() != hokm
 				 && card.getRank().compare(highCard.getRank()) > 0 ){
 			return true;
 		}
@@ -168,7 +196,7 @@ public class GameLogic {
 			Card highCard = deck.getCard(Rank.Two, table.getCurrentSuit());		
 			// choosing the most powerful card on the table
 			for(Card card : cards)
-				if(compare(card, highCard))
+				if(dominance(card, highCard))
 					highCard = card;
 			
 			Player scorer = table.getCardPlayer(highCard);
@@ -176,12 +204,12 @@ public class GameLogic {
 			table.clearTable();
 
 			
-			// @hadi: correct this.
-			// if (scorer.getTeam().getpacksWon() == 7) --> daste jadide bazi badesh packs won sefr.
-			// if (scorer.getTeam().getRoundsWon() == 7) --> game over. 	
-			
-			if(scorer.getTeam().getRoundsWon() == 7){
-				// GameOver
+			if(scorer.getTeam().getPacksWon() == 7){
+				scorer.getTeam().winRound();
+				// DO Stuff
+				if(scorer.getTeam().getRoundsWon() == 7){
+					// Game Over
+				}
 			}
 		}
 		

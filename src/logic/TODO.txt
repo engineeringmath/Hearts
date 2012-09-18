@@ -9,29 +9,44 @@ Chand to nokte:
 
 !!! alireza farahani
 man be card o deck o table dast zadam!
-
-
+---
 @alireza: check Team.java
-
+---
 --
-NEW!!! @hadi: check the team.java and GameLogic.java and read the comment I have written.
-DealCards naghese! chi bayad daghighan besh ezafe she?
+@hadi: check the team.java[done] and GameLogic.java[done] and read the comment I have written.
+DealCards[Done] naghese! chi bayad daghighan besh ezafe she?
 correct the bug in Gamelogic.compare()
 make the get methods of packsWonInfo and playersCardsInfo.
+---
 
+New:
+@Alireza:  COMPILER ERROR in Team
 ----------------------------------------------------------------
 TODOs:
+	-> requestInfo()
+			-> PacksWonInfo   *** COMPILER ERROR, alireza fix  
+	-> Move
+			-> toBytes & fromBytes for remaining moves 
+			
+	-> playMove hash checking
+	
+	-> Testing:
+			-> Move serialization
+			-> 
+
+
+-------------- DONE --------------
+
+Hadi:
+	-> Move
+		-> serialize
+		-> deserialize
+Alireza:
+GameLogic:
 	-> requestInfo()
 			-> TurnRequest
 			-> HokmRequest
 			-> HakemRequest
-			-> StatsRequest  
-	-> Move
-			-> serialize
-			-> deserialize
-
-
--------------- DONE --------------
 
 Hadi
 GameLogic.java:
@@ -48,7 +63,6 @@ Table.java:
 	-> getTableCards()
 	-> clearTable()
 	
-Alireza! man neveshtam inaro
 Deck.java:
 	-> All of it
 

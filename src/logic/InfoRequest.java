@@ -8,4 +8,5 @@ public enum InfoRequest {
 	PacksWonRequest,
 	RoundsWonRequest,
 	PlayersCardsRequest,
+	GameHashRequest
 }

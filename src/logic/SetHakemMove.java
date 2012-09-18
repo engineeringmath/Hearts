@@ -1,5 +1,7 @@
 package logic;
 
+import java.nio.ByteBuffer;
+
 public class SetHakemMove extends Move{
 	private int playerNumber;
 
@@ -8,10 +10,7 @@ public class SetHakemMove extends Move{
 	}
 	 
 	public SetHakemMove(int playerNumber){
-		if (playerNumber >= 0 && playerNumber <=3) // i assumed the number is in range of 0 to 3.
-		{
-			this.playerNumber = playerNumber;
-		}
+		this.playerNumber = playerNumber;
 	}
 	
 	public int getPlayerNumber() {
@@ -22,9 +21,19 @@ public class SetHakemMove extends Move{
 		this.playerNumber = playerNumber;
 	}
 
-	@Override
-	public byte[] serialize() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public byte getMoveId(){
+		return 4;
+	}
+
+	public byte[] toBytes(){
+		return new byte[]{(byte)this.playerNumber};
+ 	}
+
+	public static Move fromBytes(byte[] bytes){
+		ByteBuffer buff = ByteBuffer.wrap(bytes);
+		byte playerNumber = buff.get();
+		SetHakemMove move = new SetHakemMove(playerNumber);
+		return move;
 	}
 }

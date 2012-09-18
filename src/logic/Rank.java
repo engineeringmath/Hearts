@@ -28,7 +28,7 @@ public enum Rank {
 		return (this.number > rank.number ? 1 : (this.number == rank.number ? 0 : -1));  
 	}
 	
-	public static Rank getRank(int number){
+	public static Rank fromNumber(int number){
 		return Rank.values()[number];
 	}
 }

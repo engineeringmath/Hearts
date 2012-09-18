@@ -41,7 +41,11 @@ public class Team {
 	public int getRoundsWon() {
 		return roundsWon;
 	}
-	
+
+	public int getPacksWon(){
+		return packsWon.size();
+	}	
+
 	public ArrayList<ArrayList<Card>> getPacksWon(){
 		return packsWon;
 	}
@@ -51,10 +55,13 @@ public class Team {
 		packsWon.clear();
 	}
 	
+	public void winRound(){
+		roundsWon++;
+		clearTablePacks();
+	}
+
 	// i added the if part.
 	public void addPacksWon(Card[] pack){
 		packsWon.add(new ArrayList<Card>(Arrays.asList(pack)));
-		if(packsWon.size() == 7)
-			roundsWon++;
 	}
 }
