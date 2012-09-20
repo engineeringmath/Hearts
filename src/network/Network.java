@@ -29,9 +29,8 @@ public class Network{
 	private static Network instance;
 	
 	public void newInstance(Game game){
-		try {
-			instance = new Network(game);
-		} catch (IOException e) {System.err.println("newInstance / Network.java");}
+		try {instance = new Network(game);}
+		catch (IOException e) {System.err.println("newInstance / Network.java");}
 	}
 	
 	public Network getInstance(){
@@ -75,16 +74,14 @@ public class Network{
 			socket = new Socket(address, Statics.SERVER_SOCKET_PORT);
 			input  = socket.getInputStream();
 			output = socket.getOutputStream();
-		}catch (IOException e) {System.err.println("Client.Init");}
+		}
+		catch (IOException e) {System.err.println("Client.Init");}
 		
 		//
 		while(!socket.isClosed()){
-			try {
-//				Object recieved = input.readObject();	
+			try {//				Object recieved = input.readObject();	
 			}catch (Exception e) {System.err.println("Client.Recieve");}
-			
 		}
-		
 	}
 	
 	
