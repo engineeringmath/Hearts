@@ -23,7 +23,21 @@ import network.message.MessageType;
  * Set the return value to it's proper value:D
  */
 
-public class Client{
+public class Network{
+	
+	
+	private static Network instance;
+	
+	public void newInstance(Game game){
+		try {
+			instance = new Network(game);
+		} catch (IOException e) {System.err.println("newInstance / Network.java");}
+	}
+	
+	public Network getInstance(){
+		return instance;
+	}
+	
 	
 	private MulticastSocket ms;
 	private InetAddress group;
@@ -33,8 +47,8 @@ public class Client{
 	private OutputStream output;
 	private InetAddress ip;
 	private boolean isConnected;
-	
-	public Client(Game game) throws IOException {
+		
+	private Network(Game game) throws IOException {
 		this.game = game;
 		ms = new MulticastSocket(Statics.MULTICAST_SOCKET_PORT);
 		group = InetAddress.getByName(Statics.BROADCAST_GROUP_IP);
@@ -49,7 +63,7 @@ public class Client{
 				try {ms.receive(dp);}
 				catch (IOException e) {e.printStackTrace();}
 				Map<String, String> serverInfo = StringSerializer.deserialize(dp.getData());
-				Client.this.game.localServers(serverInfo);
+//				Client.this.game.localServers(serverInfo); // Gives Graphics the server's list to show :-bd
 				}
 			}; 
 		};
@@ -96,7 +110,7 @@ public class Client{
 	 * gets the move of another player from the server and plays the move ( via the game instance )
 	 */
 	private void getServerMove(Move move){
-		game.playMove(move);
+//		game.playMove(move); -> plays the move 
 	}
 	
 	private void closeConnection(){
